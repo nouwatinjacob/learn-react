@@ -30,7 +30,7 @@ var IndecisionApp = function (_React$Component) {
     value: function handleDeleteOptions() {
       this.setState(function () {
         return {
-          options: []
+          options: props.option
         };
       });
     }
@@ -59,12 +59,11 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var title = 'Indecision App';
       var subtitle = 'Put your life in the hands of a Computer';
       return React.createElement(
         'div',
         null,
-        React.createElement(Header, { title: title, subtitle: subtitle }),
+        React.createElement(Header, { subtitle: subtitle }),
         React.createElement(Action, {
           hasptions: this.state.options.length > 0,
           handlePick: this.handlePick
@@ -83,6 +82,10 @@ var IndecisionApp = function (_React$Component) {
   return IndecisionApp;
 }(React.Component);
 
+IndecisionApp.defaultProps = {
+  option: []
+};
+
 var Header = function Header(props) {
   return React.createElement(
     'div',
@@ -92,12 +95,16 @@ var Header = function Header(props) {
       null,
       props.title
     ),
-    React.createElement(
+    props.subtitle && React.createElement(
       'h2',
       null,
       props.subtitle
     )
   );
+};
+
+Header.defaultProps = {
+  title: 'Indecision App'
 };
 
 var Action = function Action(props) {
